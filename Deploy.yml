@@ -75,11 +75,11 @@
           - 5656:5699
           - 10001
           - 1900
-    - name: Allow SSH
-      ufw:
-        rule: limit
-        port: ssh 
-        proto: tcp
+      - name: Allow SSH
+        ufw:
+          rule: limit
+          port: ssh 
+          proto: tcp
 
 # Start Unifi
   - name: Configure Controller
