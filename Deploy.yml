@@ -1,0 +1,92 @@
+---
+#Install Dependancies
+  - name: Download Dependancies
+    host: localhost
+    tasks:
+      - name: ca-certificates
+        apt:
+          name: ca-certificates
+          state: latest
+      - name: apt-transport-https
+        apt:
+          name: apt-transport-https
+          state: latest
+      - name: openjdk-8-jre-headless
+        apt: 
+          name: openjdk-8-jre-headless
+          state: latest
+      - name: wget
+        apt:
+          name: wget
+          state: latest
+
+#Set Up Inifi and MongoDB Repos
+  - name: Set up Unifi Repo
+    host: localhost
+    tasks:
+      - name: Add Unifi Repo
+        shell: echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' | tee /etc/apt/sources.list.d/100-ubnt-unifi.list
+      - name: Add Unifi PGP Key
+        shell: wget -qO - https://www.mongodb.org/static/pgp/server-3.4.asc | apt-key add -
+      - name: Add MongoDB Repo
+        shell:  echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+      - name: Update Apt Cache
+        apt:
+          update_cache: yes
+      - name: Add MongoDB GPG Key
+        shell: apt-key adv --keyserver keyserver.ubuntu.com --recv 06E85760C0A52C50 
+      - name: prevent Java from updating to V11
+        shell: apt-mark hold openjdk-11-*
+
+# Install Unifi
+  - name: Install Unifi
+    host: localhost
+    tasks:
+      - name: Update Cache
+        apt:
+          update_cache: yes
+      - name: Install Unifi
+        apt:
+          name: unifi
+          state: latest
+
+# Configure UFW Rules
+  - name: UFW Setup
+    hosts: localhost
+    tasks:
+      - name Set Default Profiles
+        shell: ufw default deny incoming && ufw default allow outgoing
+      - name: Set allowed Ports for Unifi Controller
+        ufw:
+          rule: allow
+          port: '{{ item }}'
+          proto: tcp
+          comment: Used by Unifi Controller
+        with_items:
+          - 3478
+          - 5514
+          - 8080
+          - 443
+          - 8443
+          - 8080
+          - 8843
+          - 6789
+          - 27117
+          - 5656:5699
+          - 10001
+          - 1900
+    - name: Allow SSH
+      ufw:
+        rule: limit
+        port: ssh 
+        proto: tcp
+
+# Start Unifi
+  - name: Configure Controller
+    hosts: localhost
+    tasks:
+      - name: Start Unifi Controller
+        systemd:
+          name: unifi
+          state: started
+          enabled: yes
