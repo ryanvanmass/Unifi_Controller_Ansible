@@ -52,7 +52,7 @@
 
 # Configure UFW Rules
   - name: UFW Setup
-    hostss: localhost
+    hosts: localhost
     tasks:
       - name: Set Default Profiles
         shell: ufw default deny incoming && ufw default allow outgoing
@@ -83,7 +83,7 @@
 
 # Start Unifi
   - name: Configure Controller
-    hostss: localhost
+    hosts: localhost
     tasks:
       - name: Start Unifi Controller
         systemd:
