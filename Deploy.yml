@@ -60,18 +60,19 @@
           proto: tcp
           comment: Used by Unifi Controller
         with_items:
-          - 3478
-          - 5514
-          - 8080
-          - 443
-          - 8443
-          - 8080
-          - 8843
-          - 6789
-          - 27117
-          - 5656:5699
-          - 10001
-          - 1900
+        # Port Info found at https://help.ui.com/hc/en-us/articles/218506997-UniFi-Ports-Used
+          - 3478      # Port used for STUN
+          - 5514      # Port used for Remote Syslog Capture
+          - 8080      # Port used for device and application communication
+          - 443       # Port used for applicaton GUI/API as seen in Web Browser (Applications hosted on a UniFi OS Console)
+          - 8443      # Port used for applicaton GUI/API as seen in Web Browser (Applications hosted on Linux)
+          - 8880      # Port used for HTTP portal Redirection
+          - 8843      # Port used for HTTPS portal redirection
+          - 6789      # Port used for UniFi Mobile Speed Test
+          - 27117     # Port used for local-bound database communication
+          - 5656:5699 # Port used for AP-EDU broadcasting
+          - 10001     # Port used for device discovery
+          - 1900      # Port used for "Make application discoverable on L2 network" in the UniFi Network Settings
       - name: Allow SSH
         ufw:
           rule: limit
