@@ -1,7 +1,7 @@
 ---
 #Install Dependancies
   - name: Download Dependancies
-    host: localhost
+    hosts: localhost
     tasks:
       - name: ca-certificates
         apt:
@@ -22,7 +22,7 @@
 
 #Set Up Inifi and MongoDB Repos
   - name: Set up Unifi Repo
-    host: localhost
+    hosts: localhost
     tasks:
       - name: Add Unifi Repo
         shell: echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' | tee /etc/apt/sources.list.d/100-ubnt-unifi.list
@@ -40,7 +40,7 @@
 
 # Install Unifi
   - name: Install Unifi
-    host: localhost
+    hosts: localhost
     tasks:
       - name: Update Cache
         apt:
@@ -52,7 +52,7 @@
 
 # Configure UFW Rules
   - name: UFW Setup
-    hosts: localhost
+    hostss: localhost
     tasks:
       - name: Set Default Profiles
         shell: ufw default deny incoming && ufw default allow outgoing
@@ -83,7 +83,7 @@
 
 # Start Unifi
   - name: Configure Controller
-    hosts: localhost
+    hostss: localhost
     tasks:
       - name: Start Unifi Controller
         systemd:
