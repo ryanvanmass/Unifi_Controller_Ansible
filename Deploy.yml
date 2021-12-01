@@ -54,7 +54,7 @@
   - name: UFW Setup
     hosts: localhost
     tasks:
-      - name Set Default Profiles
+      - name: Set Default Profiles
         shell: ufw default deny incoming && ufw default allow outgoing
       - name: Set allowed Ports for Unifi Controller
         ufw:
