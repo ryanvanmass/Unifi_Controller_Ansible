@@ -72,7 +72,6 @@
           - 5656:5699 # Port used for AP-EDU broadcasting
           - 10001     # Port used for device discovery
           - 1900      # Port used for "Make application discoverable on L2 network" in the UniFi Network Settings
-          # Port Info found at https://help.ui.com/hc/en-us/articles/218506997-UniFi-Ports-Used
       - name: Allow SSH
         ufw:
           rule: limit
