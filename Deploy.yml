@@ -60,6 +60,7 @@
           proto: tcp
           comment: Used by Unifi Controller
         with_items:
+        # Port Info found at https://help.ui.com/hc/en-us/articles/218506997-UniFi-Ports-Used
           - 3478      # Port used for STUN
           - 5514      # Port used for Remote Syslog Capture
           - 8080      # Port used for device and application communication
