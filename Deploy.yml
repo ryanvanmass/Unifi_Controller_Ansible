@@ -35,7 +35,7 @@
       - name: Add MONGO PGP Key
         shell: wget -qO - https://www.mongodb.org/static/pgp/server-4.0.asc | apt-key add -
       - name: Add MongoDB Repo
-        shell: echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.0 main" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+        shell: echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
 #      - name: prevent Java from updating to V11
 #        shell: apt-mark hold openjdk-11-*
 
