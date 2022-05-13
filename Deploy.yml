@@ -11,7 +11,7 @@
         apt:
           name: apt-transport-https
           state: latest
-      - name: openjdk-8-jre-headless
+      - name: openjdk-11-jre-headless
         apt: 
           name: openjdk-11-jre-headless
           state: latest
@@ -27,7 +27,7 @@
       - name: Add Unifi Repo
         shell: echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' | tee /etc/apt/sources.list.d/100-ubnt-unifi.list
       - name: Add Unifi PGP Key
-        shell: wget -qO - https://www.mongodb.org/static/pgp/server-3.4.asc | apt-key add -
+        shell: wget -qO https://www.mongodb.org/static/pgp/server-3.4.asc | apt-key add -
       - name: Add MongoDB Repo
         shell:  echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.4.list
       - name: Add MongoDB GPG Key
