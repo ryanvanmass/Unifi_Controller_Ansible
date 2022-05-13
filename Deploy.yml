@@ -19,6 +19,10 @@
         apt:
           name: wget
           state: latest
+      - name: gnupg
+        apt:
+          name: gnupg
+          state: latest
 
 #Set Up Inifi and MongoDB Repos
   - name: Set up Unifi Repo
