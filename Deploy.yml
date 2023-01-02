@@ -11,9 +11,9 @@
         apt:
           name: apt-transport-https
           state: latest
-      - name: openjdk-8-jre-headless
+      - name: openjdk-11-jre-headless
         apt: 
-          name: openjdk-8-jre-headless
+          name: openjdk-11-jre-headless
           state: latest
       - name: wget
         apt:
